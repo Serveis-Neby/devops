@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    attach: false
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    attach: false
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    attach: false
+
+  backend:
+    container_name: backend
+    build: ../backend
+
+  frontend:
+    container_name: frontend
+    build: ../frontend

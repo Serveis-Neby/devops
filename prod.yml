@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  db:
+    ports:
+      - 5432:5432
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    extends:
+      file: common.yml
+      service: db
+
+  nginx:
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx-prod.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
+    extends:
+      file: common.yml
+      service: nginx
+
+  backend:
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    extends:
+      file: common.yml
+      service: backend
+
+  frontend:
+    command: npm start
+    ports:
+      - 4000:4000
+    depends_on:
+      - backend
+    extends:
+      file: common.yml
+      service: frontend
