@@ -20,8 +20,12 @@ services:
 
   backend:
     container_name: backend
-    build: ../backend
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.prod
+    attach: false
 
   frontend:
     container_name: frontend
     build: ../frontend
+    attach: false

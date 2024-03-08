@@ -38,6 +38,8 @@ services:
       service: nginx
 
   backend:
+    build:
+      dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
     environment:
@@ -47,6 +49,8 @@ services:
       DB_PASSWORD: password
       DB_HOST: db
       DB_PORT: 5432
+    volumes:
+      - ../backend/src:/app/src
     depends_on:
       - db
     extends:
