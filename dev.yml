@@ -11,8 +11,6 @@ services:
       service: db
     volumes:
       - ./data.sql:/docker-entrypoint-initdb.d/data.sql
-    environment:
-      POSTGRES_DB: tu_basededatos
 
   pgadmin:
     ports:
