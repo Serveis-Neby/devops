@@ -5,7 +5,8 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - ".env.dev"
+      - path: ".env.dev"
+        required: true
     volumes:
       - ./data-dev.sql:/docker-entrypoint-initdb.d/data.sql
     extends:
@@ -16,7 +17,8 @@ services:
     ports:
       - 5000:80
     env_file:
-      - ".env.dev"
+      - path: ".env.dev"
+        required: true
     depends_on:
       - db
     extends:
@@ -40,8 +42,9 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
-    env_file: 
-      - ".env.dev"
+    env_file:
+      - path: ".env.dev"
+        required: true
     volumes:
       - ../backend/src:/app/src
     depends_on:
@@ -55,7 +58,8 @@ services:
     ports:
       - 4000:4000
     env_file:
-      - ".env.dev"
+      - path: ".env.dev"
+        required: true
     volumes:
       - ../frontend/src:/app/src
       - /app/node_modules
