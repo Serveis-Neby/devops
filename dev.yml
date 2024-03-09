@@ -4,11 +4,8 @@ services:
   db:
     ports:
       - 5432:5432
-    environment:
-      DATABASE_HOST: 127.0.0.1
-      POSTGRES_DB: mydb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+    env_file:
+      - "develop.env"
     extends:
       file: common.yml
       service: db
@@ -16,9 +13,8 @@ services:
   pgadmin:
     ports:
       - 5000:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: test@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: password
+    env_file:
+      - "develop.env"
     depends_on:
       - db
     extends:
@@ -42,13 +38,8 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
-    environment:
-      HTTP_PORT: 3000
-      DB_NAME: postgres
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_HOST: db
-      DB_PORT: 5432
+    env_file: 
+      - "develop.env"
     volumes:
       - ../backend/src:/app/src
     depends_on:
