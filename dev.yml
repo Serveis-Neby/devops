@@ -6,11 +6,11 @@ services:
       - 5432:5432
     env_file:
       - ".env.dev"
+    volumes:
+      - ./data-dev.sql:/docker-entrypoint-initdb.d/data.sql
     extends:
       file: common.yml
       service: db
-    volumes:
-      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
 
   pgadmin:
     ports:
@@ -54,6 +54,8 @@ services:
     command: npm run dev
     ports:
       - 4000:4000
+    env_file:
+      - ".env.dev"
     volumes:
       - ../frontend/src:/app/src
       - /app/node_modules

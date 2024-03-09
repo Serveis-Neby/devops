@@ -4,11 +4,10 @@ services:
   db:
     ports:
       - 5432:5432
-    environment:
-      DATABASE_HOST: 127.0.0.1
-      POSTGRES_DB: mydb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+    env_file:
+      - ".env.prod"
+    volumes:
+      - ./data-prod.sql:/docker-entrypoint-initdb.d/data.sql
     extends:
       file: common.yml
       service: db
@@ -30,13 +29,8 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - 3000:3000
-    environment:
-      HTTP_PORT: 3000
-      DB_NAME: postgres
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_HOST: db
-      DB_PORT: 5432
+    env_file:
+      - ".env.prod"
     depends_on:
       - db
     extends:
@@ -47,6 +41,8 @@ services:
     command: npm start
     ports:
       - 4000:4000
+    env_file:
+      - ".env.prod"
     depends_on:
       - backend
     extends:
