@@ -5,7 +5,7 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - "develop.env"
+      - ".env.dev"
     extends:
       file: common.yml
       service: db
@@ -18,7 +18,7 @@ services:
     ports:
       - 5000:80
     env_file:
-      - "develop.env"
+      - ".env.dev"
     depends_on:
       - db
     extends:
@@ -43,7 +43,7 @@ services:
     ports:
       - 3000:3000
     env_file: 
-      - "develop.env"
+      - ".env.dev"
     volumes:
       - ../backend/src:/app/src
     depends_on:
