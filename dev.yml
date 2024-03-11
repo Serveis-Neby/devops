@@ -47,6 +47,7 @@ services:
         required: true
     volumes:
       - ../backend/src:/app/src
+      - ../backend/include:/app/include
     depends_on:
       - db
     extends:
