@@ -5,10 +5,10 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - path: ".env.dev"
+      - path: ".env.test"
         required: true
     volumes:
-      - ./data-dev.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./data-test.sql:/docker-entrypoint-initdb.d/data.sql
     extends:
       file: common.yml
       service: db
@@ -17,7 +17,7 @@ services:
     ports:
       - 5000:80
     env_file:
-      - path: ".env.dev"
+      - path: ".env.test"
         required: true
     depends_on:
       - db
@@ -43,7 +43,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - path: ".env.dev"
+      - path: ".env.test"
         required: true
     volumes:
       - ../backend/src:/app/src
@@ -54,12 +54,28 @@ services:
       file: common.yml
       service: backend
 
+  test:
+    container_name: test
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.test
+    ports:
+      - 3333:3333
+    env_file:
+      - path: ".env.test"
+        required: true
+    volumes:
+      - ../backend/test_setup/tests:/app/test_setup/tests
+    depends_on:
+      - db
+      - backend
+
   frontend:
     command: npm run dev
     ports:
       - 4000:4000
     env_file:
-      - path: ".env.dev"
+      - path: ".env.test"
         required: true
     volumes:
       - ../frontend/src:/app/src
