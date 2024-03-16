@@ -59,13 +59,11 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile.test
-    ports:
-      - 3333:3333
     env_file:
       - path: ".env.test"
         required: true
     volumes:
-      - ../backend/test_setup/tests:/app/test_setup/tests
+      - ../backend/test/tests:/app/test/tests
     depends_on:
       - db
       - backend
