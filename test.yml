@@ -69,19 +69,3 @@ services:
     depends_on:
       - db
       - backend
-
-  frontend:
-    command: npm run dev
-    ports:
-      - 4000:4000
-    env_file:
-      - path: ".env.test"
-        required: true
-    volumes:
-      - ../frontend/src:/app/src
-      - /app/node_modules
-    depends_on:
-      - backend
-    extends:
-      file: common.yml
-      service: frontend
