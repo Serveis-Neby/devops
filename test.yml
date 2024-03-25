@@ -32,7 +32,6 @@ services:
       - ./nginx-dev.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend
-      - frontend
     extends:
       file: common.yml
       service: nginx
