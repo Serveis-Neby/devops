@@ -6,7 +6,8 @@ services:
       - path: ".env.dev"
         required: true
     volumes:
-      - ./data-dev.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/data1.sql
+      - ./mock-data.sql:/docker-entrypoint-initdb.d/data2.sql
     extends:
       file: common.yml
       service: db

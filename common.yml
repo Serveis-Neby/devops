@@ -25,6 +25,13 @@ services:
       dockerfile: Dockerfile.prod
     attach: false
 
+  test:
+    container_name: test
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.test
+    attach: true
+
   frontend:
     container_name: frontend
     build: ../frontend
