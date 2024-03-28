@@ -1,7 +1,7 @@
 INSERT INTO communities (community_name, community_code) VALUES ('Test Community', '12345678');
 
-INSERT INTO users (username, email, password, type, community_id, balance) VALUES
-	('JohnDoe', 'johndoe@example.com', 'Test1234!', 'admin', '12345678', 1000),
-	('JaneDoe', 'janedoe@example.com', 'Test1234!', 'neighbor', '12345678', 0);
-	('Tom_Smith', 'tomsmith@example.com', 'Test1234!', 'neighbor', '12345678', 253);
-	('Amy Adams', 'amyadams@example.com', 'Test1234!', 'neighbor', '12345678', 741);
+INSERT INTO users (community_id, username, email, password, type, balance) VALUES
+	((SELECT id FROM communities WHERE community_code = '12345678'), 'JohnDoe', 'johndoe@example.com', 'Test1234!', 'admin', 1000),
+	((SELECT id FROM communities WHERE community_code = '12345678'), 'JaneDoe', 'janedoe@example.com', 'Test1234!', 'neighbor', 0),
+	((SELECT id FROM communities WHERE community_code = '12345678'), 'TomSmith', 'tomsmith@example.com', 'Test1234!', 'neighbor', 253),
+	((SELECT id FROM communities WHERE community_code = '12345678'), 'AmyAdams', 'amyadams@example.com', 'Test1234!', 'neighbor', 741);
