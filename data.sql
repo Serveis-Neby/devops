@@ -10,8 +10,8 @@ CREATE TYPE notification_status AS ENUM ('pending', 'accepted', 'refused');
 
 CREATE TABLE IF NOT EXISTS communities (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-	community_name VARCHAR(255) NOT NULL,
-	community_code VARCHAR(8) UNIQUE NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	code VARCHAR(8) UNIQUE NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
