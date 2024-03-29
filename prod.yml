@@ -6,7 +6,7 @@ services:
       - path: ".env.prod"
         required: true
     volumes:
-      - ./data-prod.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
     extends:
       file: common.yml
       service: db
