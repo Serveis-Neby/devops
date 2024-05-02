@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS services (
 CREATE TABLE IF NOT EXISTS notifications (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 	sender_id UUID REFERENCES users(id) ON DELETE SET NULL,
-	receiver_id UUID REFERENCES users(id) ON DELETE SET NULL,
 	service_id UUID REFERENCES services(id) ON DELETE SET NULL,
 	status notification_status DEFAULT 'pending',
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
