@@ -75,7 +75,7 @@ CREATE TABLE achievements (
 
 CREATE TABLE user_achievements (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-	user_id UUID REFERENCES users(id),
+	user_id UUID REFERENCES users(id) ON DELETE CASCADE,
 	achievement_title VARCHAR(100) REFERENCES achievements(title),
 	status achievement_status NOT NULL DEFAULT 'in_progress'
 );
