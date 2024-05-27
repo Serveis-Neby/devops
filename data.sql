@@ -56,8 +56,17 @@ CREATE TABLE
 		reward INT
 	);
 
+CREATE TABLE 
+	IF NOT EXISTS ratings (
+		id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+		service_id UUID UNIQUE REFERENCES services(id) ON DELETE cascade,
+		rating INT NOT NULL,
+		created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	);
+
 CREATE TABLE
-	user_achievements (
+	IF NOT EXISTS user_achievements (
 		id UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
 		user_id UUID REFERENCES users (id) ON DELETE CASCADE,
 		achievement_title VARCHAR(100) REFERENCES achievements (title),
@@ -71,20 +80,6 @@ CREATE TABLE
 		created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 	);
-
-CREATE TABLE IF NOT EXISTS ratings (
-	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-	service_id UUID UNIQUE REFERENCES services(id) ON DELETE cascade,
-	rating INT NOT NULL,
-	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE achievements (
-	title VARCHAR(100) PRIMARY KEY,
-	description TEXT,
-	reward INT
-);
 
 CREATE TABLE
 	IF NOT EXISTS notifications_services (
