@@ -90,13 +90,13 @@ CREATE TABLE
 		status notification_services_status DEFAULT 'pending',
 		notification_id UUID REFERENCES notifications (id) ON DELETE CASCADE
 	);
-
+			
 CREATE TABLE
 	IF NOT EXISTS notifications_achievements (
 		id UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
-		achievement_user_id UUID REFERENCES notifications (id) ON DELETE CASCADE
+		achievement_user_id UUID REFERENCES user_achievements (id) ON DELETE CASCADE,
+		notification_id UUID REFERENCES notifications (id) ON DELETE CASCADE
 	);
-
 
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
